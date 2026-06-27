@@ -8,6 +8,7 @@
   --text: #fef2e4;
   --borders: #D4C5A9;
   --footer: #82603d;
+  --forms: #FCFAF8;
 }
 
 @keyframes fadeIn {
@@ -174,10 +175,230 @@ body {
   margin-bottom: 1rem;
 }
 
+.email_input_container, .password_input_container {
+  width: 100%;
+  margin-bottom: .5rem;
+}
+
+.password_input_wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .email_input, .password_input {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid var(--borders);
   border-radius: 4px;
+}
+.email_input:focus, .password_input:focus {
+  outline: none;
+  border-color: var(--foreground);
+}
+
+.password_visibility_icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-80%);
+}
+
+.loading_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading_text {
+  font-size: 1.2rem;
+  color: var(--foreground);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.loading_spinner {
+  border: 4px solid var(--foreground);
+  border-top: 4px solid var(--text);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.log_in_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.log_in_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  padding: 2rem;
+  border: 1px solid var(--borders);
+  border-radius: 8px;
+  background-color: var(--forms);
+}
+
+.log_in_title {
+  font-size: 2rem;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.or_tag {
+  font-size: 1rem;
+  color: var(--foreground);
+  margin: 1rem 0;
+}
+
+.or_tag::after {
+  content: "";
+  display: inline-block;
+  width: 5rem;
+  height: 1px;
+  background-color: var(--foreground);
+  margin-left: 0.5rem;
+}
+
+.or_tag::before {
+  content: "";
+  display: inline-block;
+  width: 5rem;
+  height: 1px;
+  background-color: var(--foreground);
+  margin-right: 0.5rem;
+}
+
+.google_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--foreground);
+  color: var(--text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.google_button:hover {
+  background-color: var(--foreground2);
+}
+
+.google_button:active {
+  opacity: 0.6;
+}
+
+.google_button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+.google_text {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.other_page_text {
+  font-size: 1rem;
+  color: var(--foreground);
+  margin-top: 1.4rem;
+}
+
+.other_page_link {
+  color: var(--foreground2);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.other_page_link:hover {
+  color: var(--foreground);
+}
+
+.connection_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24rem;
+}
+
+.connection_button_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.forgot_password_text {
+  font-size: 0.9rem;
+  color: var(--foreground2);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.forgot_password_text:hover {
+  color: var(--foreground);
+  text-decoration: underline;
+}
+
+.connection_button {
+  padding: 0.5rem 1rem;
+  background-color: var(--foreground);
+  margin-left: auto;
+  color: var(--text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.connection_button:hover {
+  background-color: var(--foreground2);
+}
+.connection_button:active {
+  opacity: 0.6;
+}
+.connection_button.disabled {
+  background-color: var(--borders);
+  cursor: not-allowed;
+}
+
+.password_indicator {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.strength_bar {
+  width: 100%;
+  height: 5px;
+  background-color: rgb(229, 224, 224);
+  border-radius: 4px;
+}
+
+.strength_bar.filled {
+  background-color: var(--foreground);
+}
+
+.strength_text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: .8rem;
+  font-weight: bold;
+  margin-top: 5px;
 }

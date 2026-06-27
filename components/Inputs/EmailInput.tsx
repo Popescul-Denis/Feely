@@ -7,7 +7,7 @@ type Props = {
 
 const EmailInput = ({handleChange, isLoading}: Props) => {
   return (
-    <div>
+    <div className='email_input_container'>
       <p className='before_text'>E-mail</p>
       <input type="email" placeholder='' onChange={handleChange} className='email_input' disabled={isLoading}/>
     </div>

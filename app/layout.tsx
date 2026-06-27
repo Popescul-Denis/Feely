@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@components/ComponentBars/Navbar";
 import Footer from "@components/ComponentBars/Footer";
+import Provider from "@components/Provider/Provider";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -23,9 +24,11 @@ const RootLayout = ({
       lang="en"
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+        <Provider>
+          <Navbar />
+          {children}
+          <Footer />
+        </Provider>
       </body>
     </html>
   );

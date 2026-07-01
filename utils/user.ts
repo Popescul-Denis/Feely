@@ -2,12 +2,12 @@ import {db} from "@/lib/prisma";
 
 export async function getUserByEmail(email: string) {
   try {
-    const lowerCaseEmail = email.toLowerCase();
     const user = await db.user.findUnique({
-      where: { email: lowerCaseEmail },
+      where: { email },
     });
     return user;
   }catch (error) {
-    return null;
+    console.error("Eroare la obținerea utilizatorului:", error);
+    throw new Error("Eroare la obținerea utilizatorului");
   }
 }

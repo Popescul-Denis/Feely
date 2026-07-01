@@ -1,13 +1,14 @@
 import { NextAuthOptions } from "next-auth";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import { db } from "./prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/utils/user";
+import type { Adapter } from "next-auth/adapters";
 
 export const authOptions : NextAuthOptions = {
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(db) as Adapter,
   providers : [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -21,6 +22,9 @@ export const authOptions : NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          throw new Error("All fields are required");
+        }
+        if(!credentials.email || !credentials.password){
           throw new Error("All fields are required");
         }
 
@@ -60,7 +64,7 @@ export const authOptions : NextAuthOptions = {
       if(token && session.user){
         session.user.id = token.id;
         session.user.email = token.email;
-        session.user.name = token.name;
+        session.user.name = token.name ?? undefined;
       }
 
       return session;

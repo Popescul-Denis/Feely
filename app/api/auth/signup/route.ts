@@ -13,9 +13,7 @@ export async function POST( req : NextRequest) {
       return NextResponse.json({error: "Date necesare"},{status: 400});
     }
 
-    const normalizedEmail = email.toLowerCase().trim();
-
-    if(!validator.isEmail(normalizedEmail)){
+    if(!validator.isEmail(email)){
       return NextResponse.json({error: "Te rog introdu o adresa de email valida"},{status: 400});
     }
 
@@ -41,13 +39,14 @@ export async function POST( req : NextRequest) {
         email: email,
         password: hashedPassword,
         name: name,
-        emailVerified: new Date(),
+        emailVerified: null,
       },
     });
 
     return NextResponse.json({message: "Utilizator creat cu succes", user: {
       id: newUser.id,
       email: newUser.email,
+      name: newUser.name,
     }}, {status: 201});
 
   }catch(error : unknown){

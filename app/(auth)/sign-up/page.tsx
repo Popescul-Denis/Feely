@@ -61,7 +61,8 @@ const SignUpPage = () => {
   const [successMessage, setSuccessMessage] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const [isEmailValid, setIsEmailValid] = useState<bool>(false);
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user) {
@@ -82,6 +83,10 @@ const SignUpPage = () => {
     setCanSubmit(name.trim() !== '' && email.trim() !== '' && password.trim() !== '');
   }, [name, email, password]);
 
+  useEffect(() => {
+    console.log(errorMessage);
+  }, [errorMessage]);
+  
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -89,6 +94,7 @@ const SignUpPage = () => {
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    
     setPassword(value);
   }
 
@@ -152,6 +158,10 @@ const SignUpPage = () => {
           Inregistrare
         </h1>
 
+        {successMessage && <p className='bg-green-100 text-green-700 p-3 rounded mb-4'>{successMessage}</p>}
+
+        {errorMessage && <p className='bg-red-100 text-red-700 p-3 rounded mb-4'>{errorMessage}</p>}
+
         <form action="" className="connection_form">
             <NameInput handleChange={handleNameChange} isLoading = {isLoading}/>
             <EmailInput handleChange={handleEmailChange} isLoading = {isLoading}/>
@@ -161,6 +171,7 @@ const SignUpPage = () => {
             <button className={`connection_button ${canSubmit ? '' : 'disabled'}`}
               type="submit"
               disabled={!canSubmit || isLoading}
+              onClick={handleSubmit}
             >Creeaza cont</button>
         </form>
 

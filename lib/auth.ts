@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { db } from "./prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { getUserByEmail } from "@/utils/user";
+import { getUserByEmail, getUserById } from "@/utils/user";
 import type { Adapter } from "next-auth/adapters";
 
 export const authOptions : NextAuthOptions = {
@@ -51,6 +51,20 @@ export const authOptions : NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks : {
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") {
+        return true;
+      }
+
+      const existingUser = await getUserById(user.id);
+
+      if (!existingUser?.emailVerified) {
+        return false;
+      }
+
+      return true;
+    },
+
     async jwt({ token, user}) {
       if (user) {
         token.id = user.id;

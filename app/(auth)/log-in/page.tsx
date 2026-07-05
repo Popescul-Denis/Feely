@@ -20,7 +20,8 @@ const LogInPage = () => {
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>(''); 
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
 
   useEffect(() => {
     if (status === "authenticated" && session?.user) {
@@ -65,6 +66,8 @@ const LogInPage = () => {
         password: password,
         callbackUrl: '/',
       })
+
+      setSuccessMessage('Autentificare reusita! Redirectionare...');
     }catch(error : unknown){
       const message = error instanceof Error ? error.message : 'Eroare necunoscuta';
       setErrorMessage(message);
@@ -86,6 +89,9 @@ const LogInPage = () => {
         <h1 className='log_in_title' style={prompt.style}>
           Autentificare
         </h1>
+
+        {errorMessage && <p className='error_message'>{errorMessage}</p>}
+        {successMessage && <p className='success_message'>{successMessage}</p>}
 
         <form action="" className="connection_form">
             <EmailInput handleChange={handleEmailChange} isLoading = {isLoading}/>

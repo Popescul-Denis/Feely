@@ -3,6 +3,9 @@ import { db } from "@/lib/prisma";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
+import { generateVerificationToken } from "@/lib/token";
+import { sendVerificationEmail } from "@/app/api/send/route";
+
 export async function POST( req : NextRequest) {
   try{
     const body = await req.json();
@@ -42,6 +45,10 @@ export async function POST( req : NextRequest) {
         emailVerified: null,
       },
     });
+
+    const verificationToken = await generateVerificationToken(email);
+
+    await sendVerificationEmail(email, verificationToken.token);
 
     return NextResponse.json({message: "Utilizator creat cu succes", user: {
       id: newUser.id,

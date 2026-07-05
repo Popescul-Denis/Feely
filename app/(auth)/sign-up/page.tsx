@@ -127,14 +127,14 @@ const SignUpPage = () => {
         setErrorMessage(data.error || 'Eroare la crearea contului');
       }
 
-      setSuccessMessage('Cont creat cu succes! Asteapta sa te autentificam...');
+      setSuccessMessage('Cont creat cu succes! Verifica-ti email-ul pentru a confirma contul.');
 
       // Autentificare automata dupa creare cont
-      const signInRes = await signIn('credentials', {
+      /*const signInRes = await signIn('credentials', {
         email: email,
         password: password,
         callbackUrl: '/',
-      });
+      });*/
 
     }catch(error : unknown){
       const message = error instanceof Error ? error.message : 'Eroare necunoscuta';

@@ -4,7 +4,7 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 
 import { generateVerificationToken } from "@/lib/token";
-import { sendVerificationEmail } from "../../send/route";
+import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST( req : NextRequest) {
   try{

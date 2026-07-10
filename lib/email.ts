@@ -1,16 +1,36 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+//daca suntem in development, folosim localhost, altfel folosim domeniul public
+const domain = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_BASE_URL;
 
-const domain = 'http://localhost:3000';
+const transporter = nodemailer.createTransport({ 
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
+  },
+})
+
+type EmailOptions = {
+  from?: string;
+  to: string;
+  subject: string;
+  html: string;
+};
 
 export const sendVerificationEmail = async (email: string, token: string) => {
   const verificationUrl = `${domain}/verify-email?token=${token}`;
 
-  await resend.emails.send({
-    from: 'onboarding@resend.dev',
+  const mailOptions: EmailOptions = {
+    from: process.env.SMTP_FROM,
     to: email,
-    subject: 'Verificare adresa de email',
-    html: `<p>Apasa <a href="${verificationUrl}">aici</a> pentru a-ti verifica adresa de email:</p>`,
-  });
+    subject: 'Verificare email',
+    html: `<p>Te rugăm să verifici adresa de email făcând click pe link-ul de mai jos:</p>
+           <a href="${verificationUrl}">Verifică email-ul</a>
+           <p>Dacă nu ai creat un cont, te rugăm să ignori acest email.</p>`,
+  };
+
+  await transporter.sendMail(mailOptions);
 }

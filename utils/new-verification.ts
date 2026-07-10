@@ -1,3 +1,4 @@
+'use server';
 import { db } from "@/lib/prisma";
 import { getUserByEmail } from "./user";
 import { getVerificationTokenByToken } from "./verification-token";

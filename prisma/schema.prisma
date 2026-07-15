@@ -60,3 +60,11 @@ model VerificationToken {
   expires    DateTime
   @@unique([email, token])
 }
+
+model ResetPasswordCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String   @unique
+  expires   DateTime
+  @@unique([email, code])
+}

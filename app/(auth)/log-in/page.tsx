@@ -99,7 +99,9 @@ const LogInPage = () => {
             <PasswordInput handleChange={handlePasswordChange} isLoading= {isLoading}/>
 
             <div className='connection_button_container'>
-              <p className='forgot_password_text'>Ai uitat parola?</p>
+              <p className='forgot_password_text' onClick={() => router.push('/reset-password')}>
+                Ai uitat parola?
+              </p>
               <button 
               type='submit' 
               className={`connection_button ${canSubmit ? '' : 'disabled'}`}

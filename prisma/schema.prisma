@@ -25,6 +25,7 @@ model User {
 
   accounts Account[]
   sessions Session[] 
+  journal Journal?
 }
 
 model Account {
@@ -67,4 +68,24 @@ model ResetPasswordCode {
   code      String   @unique
   expires   DateTime
   @@unique([email, code])
+}
+
+model Journal {
+	id  String @id @default(cuid())
+	journalPages  JournalPage[]
+	authorId  String
+	author  User  @relation(fields: [authorId], references: [id])
+	theme  String?
+
+  @@unique([authorId])
+}
+
+model JournalPage {
+	id  String @id @default(cuid())
+	date    DateTime
+	textPiece  String
+	feeling  String
+	journalId  String
+	journal   Journal  @relation(fields: [journalId], references: [id], onDelete: Cascade)
+	userHope  String
 }

@@ -34,7 +34,9 @@ const Navbar = () => {
         <button className="nav-link">Contact</button>
         {session ? (
           <>
-            <button className="nav-link">Profil</button>
+            <button className="nav-link" onClick={() => {
+              router.push(`profile`);
+            }}>Profil</button>
             <button className="nav-link" onClick={() => signOut()}>
               Deconectare
             </button>

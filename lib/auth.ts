@@ -42,6 +42,7 @@ export const authOptions : NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name ?? undefined,
+          image: user.image ?? null,
         };
       }
     })
@@ -70,6 +71,10 @@ export const authOptions : NextAuthOptions = {
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
+        token.image = user.image ?? null;
+      } else if(token.id) {
+        const dbUser = await getUserById(token.id as string);
+        token.image = dbUser?.image ?? token.image ?? null;
       }
       return token;
     },
@@ -79,6 +84,7 @@ export const authOptions : NextAuthOptions = {
         session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name ?? undefined;
+        session.user.image = token.image as string | null;
       }
 
       return session;

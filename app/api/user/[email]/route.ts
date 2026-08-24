@@ -3,19 +3,16 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { getUserByEmail } from "@utils/user";
 
-export async function GET(
-  request: NextRequest,
-  context: { params: { email: string } }
-) {
-  try {
+export async function GET({params} : {params: {email: string}}){
+  try{
     const session = await getServerSession(authOptions);
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
+    if(!session?.user?.email) {
+      return NextResponse.json({error: "Neautorizat"},{status: 401});
     }
 
-    const { email } = context.params;
-    if (!email) {
-      return NextResponse.json({ error: 'Email lipsa' }, { status: 400 });
+    const {email : email} = await params;
+    if(!email){
+      return NextResponse.json({error: "Email lipsa"}, {status: 400});
     }
 
     const user = await getUserByEmail(email);

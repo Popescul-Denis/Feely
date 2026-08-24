@@ -3,15 +3,15 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { getUserByEmail } from "@utils/user";
 
-export async function GET({params} : {params: {email: string}}){
+export async function GET(request: NextRequest, { params }: { params: Promise<{ email: string }> }){
   try{
     const session = await getServerSession(authOptions);
     if(!session?.user?.email) {
       return NextResponse.json({error: "Neautorizat"},{status: 401});
     }
 
-    const {email : email} = await params;
-    if(!email){
+    const { email } = await params;
+    if (!email) {
       return NextResponse.json({error: "Email lipsa"}, {status: 400});
     }
 

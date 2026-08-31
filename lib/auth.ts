@@ -72,9 +72,11 @@ export const authOptions : NextAuthOptions = {
         token.email = user.email;
         token.name = user.name;
         token.image = user.image ?? null;
+        token.journalPassword = user.journalPassword ?? undefined;
       } else if(token.id) {
         const dbUser = await getUserById(token.id as string);
         token.image = dbUser?.image ?? token.image ?? null;
+        token.journalPassword = dbUser?.journalPassword ?? token.journalPassword ?? undefined;
       }
       return token;
     },
@@ -85,6 +87,7 @@ export const authOptions : NextAuthOptions = {
         session.user.email = token.email;
         session.user.name = token.name ?? undefined;
         session.user.image = token.image as string | null;
+        session.user.journalPassword = token.journalPassword as string | undefined;
       }
 
       return session;

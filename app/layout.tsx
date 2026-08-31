@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Navbar from "@components/ComponentBars/Navbar";
-import Footer from "@components/ComponentBars/Footer";
+import {Navbar, Footer} from "@components/ComponentBars/bars";
 import Provider from "@components/Provider/Provider";
 
 export const viewport: Viewport = {

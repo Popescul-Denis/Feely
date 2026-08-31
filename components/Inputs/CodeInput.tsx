@@ -3,9 +3,10 @@ import React, {useState, useRef, useEffect, useEffectEvent} from 'react'
 
 type Props = {
   setUserCode : (e:string[]) => void,
+  journalCode? : string[],
 }
 
-const CodeInput = ({setUserCode} : Props) => {
+const CodeInput = ({setUserCode, journalCode} : Props) => {
 
   // dupa ce introduce o cifra in fiecare input, focusul se muta automat pe urmatorul input
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -70,7 +71,7 @@ const CodeInput = ({setUserCode} : Props) => {
       <div className="flex gap-2">
         <input
           type="text"
-          placeholder="__"
+          placeholder={ journalCode && journalCode[0] ? journalCode[0] : "__" }
           className="box_input"
           ref={(el) => {
             if (el) {
@@ -82,7 +83,7 @@ const CodeInput = ({setUserCode} : Props) => {
         />
         <input
           type="text"
-          placeholder="__"
+          placeholder={ journalCode && journalCode[1] ? journalCode[1] : "__" }
           className="box_input"
           ref={(el) => {
             if (el) {
@@ -94,7 +95,7 @@ const CodeInput = ({setUserCode} : Props) => {
         />
         <input
           type="text"
-          placeholder="__"
+          placeholder={ journalCode && journalCode[2] ? journalCode[2] : "__" }
           className="box_input"
           ref={(el) => {
             if (el) {
@@ -106,7 +107,7 @@ const CodeInput = ({setUserCode} : Props) => {
         />
         <input
           type="text"
-          placeholder="__"
+          placeholder={ journalCode && journalCode[3] ? journalCode[3] : "__" }
           className="box_input"
           ref={(el) => {
             if (el) {
@@ -118,7 +119,7 @@ const CodeInput = ({setUserCode} : Props) => {
         />
         <input
           type="text"
-          placeholder="__"
+          placeholder={ journalCode && journalCode[4] ? journalCode[4] : "__" }
           className="box_input"
           ref={(el) => {
             if (el) {
@@ -130,7 +131,7 @@ const CodeInput = ({setUserCode} : Props) => {
         />
         <input
           type="text"
-          placeholder="__"
+          placeholder={ journalCode && journalCode[5] ? journalCode[5] : "__" }
           className="box_input"
           ref={(el) => {
             if (el) {

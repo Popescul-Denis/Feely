@@ -8,7 +8,11 @@ import { Prompt } from 'next/font/google'
 const prompt = Prompt({ subsets: ['latin'], weight: '400' })
 const prompt_bold = Prompt({ subsets: ['latin'], weight: '700' })
 
-export const ProfileImageForm = () => {
+type ProfileImageFormProps = {
+  u_image_text? : string,
+}
+
+export const ProfileImageForm = ({u_image_text} : ProfileImageFormProps) => {
   const router = useRouter()
   const { data: session, update } = useSession()
   const [hovering, setHovering] = useState<boolean>(false)
@@ -112,7 +116,7 @@ export const ProfileImageForm = () => {
       />
 
       <h2 className='text-3xl mt-2' style={prompt_bold.style}>
-        {session?.user?.name}
+        {u_image_text ? u_image_text : session?.user?.name}
       </h2>
     </div>
   )

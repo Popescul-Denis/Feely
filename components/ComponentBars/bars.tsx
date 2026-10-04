@@ -45,7 +45,7 @@ export const Sidebar = ({bar_type} : SidebarProps) => {
     <div className='flex flex-col w-2xs h-full p-5'>
       <h2 className='text-2xl'>{sidebarTitle}</h2>
       <SidebarColumn colTitle='Detalii cont' colRows={['Email', 'Nume', 'Parola uitata']} />
-      <SidebarColumn colTitle='Configurare jurnal' colRows={['Parola jurnal']} />
+      <SidebarColumn colTitle='Configurare jurnal' colRows={['Parola jurnal', 'Sterge jurnal', 'Configurarea paginilor de jurnal']} />
       <SidebarColumn colTitle='Accesibilitate' colRows={['Tematica', 'Limba']} />
     </div>
   )
@@ -77,7 +77,7 @@ export const Navbar = () => {
         {session ? (
           <>
             <button className="nav-link" onClick={() => {
-              router.push(`profile`);
+              router.push('/profile');
             }}>Profil</button>
             <button className="nav-link" onClick={() => signOut()}>
               Deconectare

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
     const { journalCode } = await req.json()
 
-    if (!journalCode || !Array.isArray(journalCode) || journalCode.length !== 6) {
+    if (!journalCode || !Array.isArray(journalCode) || journalCode.length !== 6 || journalCode.join('').length !==6) {
       return NextResponse.json(
         { error: 'Cod jurnal invalid' },
         { status: 400 }

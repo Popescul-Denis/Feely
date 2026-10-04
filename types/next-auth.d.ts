@@ -8,6 +8,7 @@ declare module "next-auth" {
       name? : string
       image? : string | null
       journalPassword? : string,
+      hasJournal? : boolean,
     } & DefaultSession["user"]
   }
 
@@ -17,6 +18,7 @@ declare module "next-auth" {
     name? : string
     image? : string | null
     journalPassword? : string,
+    hasJournal? : boolean,
   }
 }
 
@@ -27,5 +29,6 @@ declare module "next-auth/jwt" {
     name?: string
     image? : string | null
     journalPassword? : string,
+    hasJournal? : boolean,
   }
 }

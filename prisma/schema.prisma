@@ -27,6 +27,7 @@ model User {
   accounts Account[]
   sessions Session[] 
   journal Journal?
+  hasJournal  Boolean  @default(false)
 }
 
 model Account {
@@ -73,6 +74,7 @@ model ResetPasswordCode {
 
 model Journal {
 	id  String @id @default(cuid())
+  journalTitle  String 
 	journalPages  JournalPage[]
 	authorId  String
 	author  User  @relation(fields: [authorId], references: [id])
@@ -84,9 +86,11 @@ model Journal {
 model JournalPage {
 	id  String @id @default(cuid())
 	date    DateTime
-	textPiece  String
+  title  String
+  textPiece  Json
 	feeling  String
 	journalId  String
 	journal   Journal  @relation(fields: [journalId], references: [id], onDelete: Cascade)
 	userHope  String
+  highlight Boolean  @default(false)
 }

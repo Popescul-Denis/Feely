@@ -119,7 +119,10 @@ export const JPSection = () => {
             <p className="font-bold">{index + 1}.</p>
             <p>{page.date.toString().slice(0, 10)}</p>
             <p>{page.title}</p>
-            <button className='bg-red-500 text-white p-3 rounded-2xl ml-auto cursor-pointer mr-5 hover:bg-red-400' onClick={() => {setShowpopup(true); setSelectedPageId(page.id)}}>Sterge</button>
+            <div className="flex gap-2 ml-auto mr-3">
+              <button className='bg-red-500 text-white p-3 rounded-2xl ml-auto cursor-pointer mr-5 hover:bg-red-400' onClick={() => {setShowpopup(true); setSelectedPageId(page.id)}}>Sterge</button>
+              <button className='bg-blue-500 text-white p-3 rounded-2xl cursor-pointer hover:bg-blue-400' onClick={() => {router.push(`/journal-page/edit-journal-page/${page.id}`)}}>Editeaza</button>
+            </div>
           </div>
         ))}
       </div>

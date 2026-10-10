@@ -464,6 +464,10 @@ export const DiaryDesign = () => {
     if(currentPage>0) setCurrentPage((prev)=> prev-1);
   }
 
+  if(journalPageData.length===0){
+    return;
+  }
+
   return (
     <div className="min-h-screen bg-[#f5f0eb] flex items-center justify-center p-8 font-serif w-[80%]" style={prompt.style}>
       {error && <p className='text-red-500'>{error}</p>}
